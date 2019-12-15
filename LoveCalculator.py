@@ -9,6 +9,7 @@ import dill
 #from os.path import exists
 import util
 from tensorflow.keras.models import load_model
+#from random import randint
 
 # load sentiment analysis model
 vocabulary = dill.load(open("vocabulary.dat", "rb"))
@@ -34,11 +35,18 @@ while user != "":
                 names.append(name)
             love_name_value = (name_value(names[0])+name_value(names[1]))/2
 
+    # Another random element: favourite colour
+    user = input("What's your favourite colour?")
+    if (user == "red"):
+        love_color = 5
+    else:
+        love_color = randint(0,5)
+
     user = input("Beschreib bitte deinen Partner / deine Partnerin kurz:\n") # Hauptelement: Sentiment analysis nach Angabe der Nutzer
     # Positive training data can come from partner searching websites
     # negative training data?
     # every positive word count as a positive point and every negative word as negative one
-    #love_partner =
+    love_partner = 100
 
     #nach der Beschreibung vom Partner
     user = input("Beschreib bitte deine persönliche Empfindung von eurer Beziehung: \n")
@@ -50,10 +58,10 @@ while user != "":
     for i in range(0, len(y)):
         sum_relationship += y[i]
     love_relationship = sum_relationship/len(y)
-    print(love_relationship)
+    print(love_relationship) # Calculate average sentiment of all the input sentences, should be comment out before launched
 
     # results of calculation
-    love_index = love_name_value*0.1 + love_partner*0.3 + love_relationship*100*0.6
+    love_index = love_name_value*0.05 + love_color*0.05 + love_partner*0.3 + love_relationship*100*0.6
     if (love_index>=1 and love_index<=20):
         print("Bei euch beiden gefriert die Hölle.")
     elif(love_index>=21 and love_index<=40):
@@ -65,9 +73,9 @@ while user != "":
     elif(love_index>=81 and love_index<=100):
         print("Das ist wahre Liebe.")
 
-    #nach beiden Angaben
-    user = input("Möchtest du Vorschläge von mir bekommen?") # Rückgabe je nach Ergebnis von der Berechnung oben
-    if (re.search("((j|J)a )|((g|G)ern)", user)):
+    #nach beiden Angaben gibt man Vorschläge
+    user = input("Möchtest du Vorschläge von mir bekommen?\n") # Rückgabe je nach Ergebnis von der Berechnung oben
+    if (re.search("((j|J)a)|((g|G)ern)", user)):
         print("bla")
         user = input("Tipp 'neu' ein, um einen neuen Test zu starten. Ansonsten drück die Enter-Taste, um den Test zu beenden.\n")
     else:
