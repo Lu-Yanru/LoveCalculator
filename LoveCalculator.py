@@ -9,7 +9,7 @@ import dill
 #from os.path import exists
 import util
 from tensorflow.keras.models import load_model
-#from random import randint
+from random import randint
 
 # load sentiment analysis model
 vocabulary = dill.load(open("vocabulary.dat", "rb"))
