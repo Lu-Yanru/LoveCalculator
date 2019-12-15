@@ -1,16 +1,15 @@
 red 5
-pink 4
-blue 4
+pink  4
+blue  4
 green 3
 black 7
 brown 2
-grey 1
+grey  1
 white 4
-yellow 5
-orange 8
+yellow  5
+orange  8
 fuchsia 2
-teal 9
-purple 7
-cyan 3
+teal  9
+purple  7
+cyan  3
 magenta 1
-

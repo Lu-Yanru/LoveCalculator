@@ -40,7 +40,7 @@ while user != "":
     if (user == "red"):
         love_color = 5
     else:
-        love_color = randint(0,5)
+        love_color = randint(1,9)
 
     user = input("Beschreib bitte deinen Partner / deine Partnerin kurz:\n") # Hauptelement: Sentiment analysis nach Angabe der Nutzer
     # Positive training data can come from partner searching websites
