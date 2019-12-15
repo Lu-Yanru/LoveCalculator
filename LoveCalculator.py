@@ -12,8 +12,8 @@ from tensorflow.keras.models import load_model
 from random import randint
 
 # load sentiment analysis model
-vocabulary = dill.load(open("vocabulary.dat", "rb"))
-model = load_model("classifier.h5")
+vocabulary = dill.load(open("vocabulary2.dat", "rb"))
+model = load_model("classifier2.h5")
 
 print("Herzlich willkommen, du bist hier genau richtig. Ich bin der schlauste LoveCalculator in der Welt und kann die Zukunft von dir und deinem Partner/deiner Partnerin vorhersagen.\n")
 user = "neu"
@@ -44,10 +44,18 @@ while user != "":
         love_color = randint(1,9)
 
     user = input("Beschreib bitte deinen Partner / deine Partnerin kurz:\n") # Hauptelement: Sentiment analysis nach Angabe der Nutzer
-    # Positive training data can come from partner searching websites
-    # negative training data?
-    # every positive word count as a positive point and every negative word as negative one
-    love_partner = 100
+    # every positive word count as some positive point and every negative word as some negative points
+    user = nltk.word_tokenize(user)
+    words,labels = util.read_csv("AFINN-111.txt")
+    counter = 0
+    sum_partner = 0
+    for i in words:
+        for j in user:
+            if re.match(i, j):
+                sum_partner += labels[counter]
+        counter += 1
+    love_partner = sum_partner/len(user) # calculate the average sentiment of the whole input
+    print(love_partner)
 
     #nach der Beschreibung vom Partner
     user = input("Beschreib bitte deine persönliche Empfindung von eurer Beziehung: \n")
