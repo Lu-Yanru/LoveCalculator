@@ -34,6 +34,7 @@ while user != "":
                 name = name.strip()
                 names.append(name)
             love_name_value = (name_value(names[0])+name_value(names[1]))/2
+            print(love_name_value)
 
     # Another random element: favourite colour
     user = input("What's your favourite colour?")
