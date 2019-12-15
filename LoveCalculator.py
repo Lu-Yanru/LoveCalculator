@@ -37,11 +37,40 @@ while user != "":
             print(love_name_value)
 
     # Another random element: favourite colour
+    ## Colour training
+    colour, index = util.read_csv('colours.txt')
+    love_colour0 = 0
     user = input("What's your favourite colour?")
-    if (user == "red"):
-        love_color = 5
-    else:
-        love_color = randint(1,9)
+    counter = 0
+    for i in colour:
+        if ( user == i):
+            love_colour0 = index[counter]
+            counter = counter + 1
+        else:
+            love_colour0 = randint(1,9)
+
+
+    love_colour1 = 0
+    user = input("What's your partner's favourite colour?")
+    counters = 0
+    for i in colour:
+        if ( user == i):
+            love_colour1 = index[counters]
+            counters = counter + 1
+        else:
+            love_colour1 = randint(1,9)
+
+    love_colour = (love_colour0 + love_colour1)/2
+    if (love_colour < 3):
+        print("You two are extremely different. Your couple's colour is icy as it can get: platinum")
+    elif(love_colour<=5):
+        print("You grow and understand each other. Your couple's colour is gold.")
+    elif(love_colour > 5):
+        print("Your energies are interesting when combined, your couple's colour is amethyst.")
+    elif(love_colour > 10):
+        print("You both are destined to be together, your colour is royal blue.")
+    elif(love_colour > 15):
+        print("Your love is true, your colour is burgundy.")
 
     user = input("Beschreib bitte deinen Partner / deine Partnerin kurz:\n") # Hauptelement: Sentiment analysis nach Angabe der Nutzer
     # every positive word count as some positive point and every negative word as some negative points
@@ -85,7 +114,16 @@ while user != "":
     #nach beiden Angaben gibt man Vorschläge
     user = input("Möchtest du Vorschläge von mir bekommen?\n") # Rückgabe je nach Ergebnis von der Berechnung oben
     if (re.search("((j|J)a)|((g|G)ern)", user)):
-        print("bla")
+        if (love_index > 20):
+            print("Outlook good, just ask them out on a date!")
+        elif (love_index < 10):
+            print("Just give up already!")
+        elif (love_index == 50):
+            print ("This escalated quickly")
+        elif (love_index > 60):
+            print("Come on chap, get your hopes up and ask them to be yours")
+        elif (love_index > 90):
+            print("You are clearly meant to be together...just marry already!")
         user = input("Tipp 'neu' ein, um einen neuen Test zu starten. Ansonsten drück die Enter-Taste, um den Test zu beenden.\n")
     else:
         break
