@@ -16,19 +16,20 @@ vocabulary = dill.load(open("vocabulary2.dat", "rb"))
 model = load_model("classifier2.h5")
 
 print("Herzlich willkommen, du bist hier genau richtig. Ich bin der schlauste LoveCalculator in der Welt und kann die Zukunft von dir und deinem Partner/deiner Partnerin vorhersagen.\n")
-user = "neu"
+user = "new"
 
+# Calculate the sum of the ASCII-value of a string of letters
 def name_value(name):
     value = 0
     for c in name:
-        value += ord(c) # Berechne die Summe von den Ascii-Werten von einer Zeichenkette
+        value += ord(c)
     return value % 100 + 1
 
 while user != "":
     #user = nltk.word_tokenize(user)
     #user_tagged = pos_model.tag(user)
-    if (re.match("(n|N)eu",user)): # Zufallselement: berechne einen Wert nach den Namen von den Nutzern
-            user = input("Gib bitte deinen Namen und den Namen von deinem Partner / deiner Partnerin ein:\n")
+    if (re.match("(n|N)ew",user)): # Random element: calculate a value according to the name of the user.
+            user = input("Please tell me your name and your partner's name:\n")
             names = []
             for name in user.split():
                 name = name.strip()
@@ -37,7 +38,7 @@ while user != "":
             print(love_name_value)
 
     # Another random element: favourite colour
-    ## Colour training
+    ## Feed in values of colours -> separate file so that you can change the values of the colours without changing the programme code
     colour, index = util.read_csv('colours.txt')
     love_colour0 = 0
     user = input("What's your favourite colour?")
@@ -72,7 +73,8 @@ while user != "":
     elif(love_colour > 15):
         print("Your love is true, your colour is burgundy.")
 
-    user = input("Beschreib bitte deinen Partner / deine Partnerin kurz:\n") # Hauptelement: Sentiment analysis nach Angabe der Nutzer
+    # Main element: Sentiment analysis according to the input of the user
+    user = input("Please describe your partner:\n")
     # every positive word count as some positive point and every negative word as some negative points
     user = nltk.word_tokenize(user)
     words,labels = util.read_csv("AFINN-111.txt")
@@ -86,8 +88,8 @@ while user != "":
     love_partner = sum_partner/len(user) # calculate the average sentiment of the whole input
     print(love_partner)
 
-    #nach der Beschreibung vom Partner
-    user = input("Beschreib bitte deine persönliche Empfindung von eurer Beziehung: \n")
+    #after description of the partner
+    user = input("Please describe your personal experience and feelings about your relationship:\n")
     # sentiment analysis (similar to imdb)
     sents = nltk.sent_tokenize(user)
     sum_relationship = 0
@@ -101,19 +103,19 @@ while user != "":
     # results of calculation
     love_index = love_name_value*0.05 + love_color*0.05 + love_partner*0.3 + love_relationship*100*0.6
     if (love_index>=1 and love_index<=20):
-        print("Bei euch beiden gefriert die Hölle.")
+        print("Between you freeze like hell.")
     elif(love_index>=21 and love_index<=40):
-        print("Ihr seid wie Hund und Katze.")
+        print("You two are like cat and dog.")
     elif (love_index>=41 and love_index<=60):
-        print("Da ist Langweile vorprogrammiert.")
+        print("Here boredness is programmed beforehand.")
     elif (love_index>=61 and love_index<=80):
-        print("Bei euch beiden sprühen die Funken.")
+        print("There is sparkle between you.")
     elif(love_index>=81 and love_index<=100):
-        print("Das ist wahre Liebe.")
+        print("This is true love.")
 
-    #nach beiden Angaben gibt man Vorschläge
-    user = input("Möchtest du Vorschläge von mir bekommen?\n") # Rückgabe je nach Ergebnis von der Berechnung oben
-    if (re.search("((j|J)a)|((g|G)ern)", user)):
+    #After the two inputs, give advice
+    user = input("Do you want my advice?\n") # Rückgabe je nach Ergebnis von der Berechnung oben
+    if (re.search("((Y|y)es)|((o|O)(k|K))", user)):
         if (love_index > 20):
             print("Outlook good, just ask them out on a date!")
         elif (love_index < 10):
@@ -124,8 +126,8 @@ while user != "":
             print("Come on chap, get your hopes up and ask them to be yours")
         elif (love_index > 90):
             print("You are clearly meant to be together...just marry already!")
-        user = input("Tipp 'neu' ein, um einen neuen Test zu starten. Ansonsten drück die Enter-Taste, um den Test zu beenden.\n")
+        user = input("Type in 'new' to start a new test, or else press enter to end the test.\n")
     else:
         break
 
-print("Vielen Dank für deinen Besuch und auf Wiedersehen!")
+print("Thank you for your visit and hope to see you soon!")
