@@ -15,8 +15,8 @@ from random import randint
 vocabulary = dill.load(open("vocabulary2.dat", "rb"))
 model = load_model("classifier2.h5")
 
-print("Herzlich willkommen, du bist hier genau richtig. Ich bin der schlauste LoveCalculator in der Welt und kann die Zukunft von dir und deinem Partner/deiner Partnerin vorhersagen.\n")
-user = "new"
+print("Hello and welcome! I am the love pharmacist. Let me prescribe you what you need most. It seems like you've found love. Let me be by your side with the best advice. \n")
+user = "(N|n)ew"
 
 # Calculate the sum of the ASCII-value of a string of letters
 def name_value(name):
@@ -105,7 +105,7 @@ while user != "":
     if (love_index>=1 and love_index<=20):
         print("Between you freeze like hell.")
     elif(love_index>=21 and love_index<=40):
-        print("You two are like cat and dog.")
+        print("You two are like cat and dog.") 
     elif (love_index>=41 and love_index<=60):
         print("Here boredness is programmed beforehand.")
     elif (love_index>=61 and love_index<=80):
