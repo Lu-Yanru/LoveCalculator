@@ -15,8 +15,8 @@ from random import randint
 vocabulary = dill.load(open("vocabulary2.dat", "rb"))
 model = load_model("classifier2.h5")
 
-print("Hello and welcome! I am the love pharmacist. Let me prescribe you what you need most. It seems like you've found love. Let me be by your side with the best advice. \n")
-user = "(N|n)ew"
+print("Hi, I am your love pharmacist. It seems like you've found love. Let me give you the best recipe that I have at hand. Just answer to my questions.\n")
+user = "new"
 
 # Calculate the sum of the ASCII-value of a string of letters
 def name_value(name):
@@ -34,14 +34,19 @@ while user != "":
             for name in user.split():
                 name = name.strip()
                 names.append(name)
-            love_name_value = (name_value(names[0])+name_value(names[1]))/2
+            if (len(names)>=2): # Error protection
+                love_name_value = (name_value(names[0])+name_value(names[1]))/2
+            else:
+                print("Too many names baby. Please pick one to be your true love.")
+                user = "new"
+                continue
             print(love_name_value)
+
 
     # Another random element: favourite colour
     ## Feed in values of colours -> separate file so that you can change the values of the colours without changing the programme code
     colour, index = util.read_csv('colours.txt')
-    love_colour0 = 0
-    user = input("What's your favourite colour?")
+    user = input("What's your favourite colour?\n")
     counter = 0
     for i in colour:
         if ( user == i):
@@ -50,9 +55,7 @@ while user != "":
         else:
             love_colour0 = randint(1,9)
 
-
-    love_colour1 = 0
-    user = input("What's your partner's favourite colour?")
+    user = input("What's your partner's favourite colour?\n")
     counters = 0
     for i in colour:
         if ( user == i):
@@ -73,6 +76,7 @@ while user != "":
     elif(love_colour > 15):
         print("Your love is true, your colour is burgundy.")
 
+
     # Main element: Sentiment analysis according to the input of the user
     user = input("Please describe your partner:\n")
     # every positive word count as some positive point and every negative word as some negative points
@@ -86,7 +90,8 @@ while user != "":
                 sum_partner += labels[counter]
         counter += 1
     love_partner = sum_partner/len(user) # calculate the average sentiment of the whole input
-    print(love_partner)
+    print(love_partner) # control
+
 
     #after description of the partner
     user = input("Please describe your personal experience and feelings about your relationship:\n")
@@ -98,20 +103,22 @@ while user != "":
     for i in range(0, len(y)):
         sum_relationship += y[i]
     love_relationship = sum_relationship/len(y)
-    print(love_relationship) # Calculate average sentiment of all the input sentences, should be comment out before launched
+    print(love_relationship) # Control, Calculate average sentiment of all the input sentences, should be comment out before launched
+
 
     # results of calculation
-    love_index = love_name_value*0.05 + love_color*0.05 + love_partner*0.3 + love_relationship*100*0.6
+    love_index = love_name_value*0.05 + love_colour*0.05 + love_partner*0.3 + love_relationship*100*0.6
     if (love_index>=1 and love_index<=20):
         print("Between you freeze like hell.")
     elif(love_index>=21 and love_index<=40):
-        print("You two are like cat and dog.") 
+        print("You two are like cat and dog.")
     elif (love_index>=41 and love_index<=60):
         print("Here boredness is programmed beforehand.")
     elif (love_index>=61 and love_index<=80):
         print("There is sparkle between you.")
     elif(love_index>=81 and love_index<=100):
         print("This is true love.")
+
 
     #After the two inputs, give advice
     user = input("Do you want my advice?\n") # Rückgabe je nach Ergebnis von der Berechnung oben
