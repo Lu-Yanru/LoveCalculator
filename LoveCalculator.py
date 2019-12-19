@@ -34,7 +34,7 @@ while user != "":
             for name in user.split():
                 name = name.strip()
                 names.append(name)
-            if (len(names)>=2):
+            if (len(names)>=2): # Error protection
                 love_name_value = (name_value(names[0])+name_value(names[1]))/2
             else:
                 print("Too many names baby. Please pick one to be your true love.")
