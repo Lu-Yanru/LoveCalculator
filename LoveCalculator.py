@@ -123,15 +123,15 @@ while user != "":
     #After the two inputs, give advice
     user = input("Do you want my advice?\n") # Rückgabe je nach Ergebnis von der Berechnung oben
     if (re.search("((Y|y)es)|((o|O)(k|K))", user)):
-        if (love_index > 20):
+        if (love_index > 10):
             print("Outlook good, just ask them out on a date!")
-        elif (love_index < 10):
+        elif (love_index <= 10):
             print("Just give up already!")
-        elif (love_index == 50):
+        elif (love_index >= 40):
             print ("This escalated quickly")
-        elif (love_index > 60):
+        elif (love_index >= 60):
             print("Come on chap, get your hopes up and ask them to be yours")
-        elif (love_index > 90):
+        elif (love_index >= 90):
             print("You are clearly meant to be together...just marry already!")
         user = input("Type in 'new' to start a new test, or else press enter to end the test.\n")
     else:
