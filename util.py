@@ -1,20 +1,12 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 28 17:11:39 2019
-
-@author: luzi
-"""
-
 import nltk
 
 # Liest eine CSV-Datei mit Sätzen und Labeln (0 negativ, 1 positiv) ein
 def read_csv(file):
     sentences = []
     labels = []
-    
+
     with open(file, "r") as f:
-        # Jede Zeile der Datei einlesen 
+        # Jede Zeile der Datei einlesen
         for line in f.readlines():
             # Zeile in zwei Teile spalten (durch Tab getrennt)
             splitted = line.split('\t')
