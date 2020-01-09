@@ -111,7 +111,7 @@ while user != "":
 
     # results of calculation
     love_index = love_name_value*0.05 + love_colour* 0.05 + love_partner*0.3 + love_relationship*100*0.6
-    print(Love_index) # Control
+    print(love_index) # Control
     if (love_index>=1 and love_index<=20):
         print("Between you freeze like hell.")
     elif(love_index>=21 and love_index<=40):
