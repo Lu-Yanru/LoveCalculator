@@ -5,11 +5,14 @@ import re
 import nltk
 #import nltk.corpus.reader.tagged as tagged
 #import nltk.tag.hmm as hmm
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
 import dill
 #from os.path import exists
 import util
 from tensorflow.keras.models import load_model
 from random import randint
+import chatbot
 
 # load sentiment analysis model
 vocabulary = dill.load(open("vocabulary2.dat", "rb"))
@@ -108,6 +111,7 @@ while user != "":
 
     # results of calculation
     love_index = love_name_value*0.05 + love_colour* 0.05 + love_partner*0.3 + love_relationship*100*0.6
+    print(Love_index) # Control
     if (love_index>=1 and love_index<=20):
         print("Between you freeze like hell.")
     elif(love_index>=21 and love_index<=40):
@@ -120,21 +124,26 @@ while user != "":
         print("This is true love.")
 
 
-    #After the two inputs, give advice
-    user = input("Do you want my advice?\n") # Rückgabe je nach Ergebnis von der Berechnung oben
-    if (re.search("((Y|y)es)|((o|O)(k|K))", user)):
-        if (love_index > 10):
-            print("Outlook good, just ask them out on a date!")
-        elif (love_index <= 10):
-            print("Just give up already!")
-        elif (love_index >= 40):
-            print ("This escalated quickly")
-        elif (love_index >= 60):
-            print("Come on chap, get your hopes up and ask them to be yours")
-        elif (love_index >= 90):
-            print("You are clearly meant to be together...just marry already!")
-        user = input("Type in 'new' to start a new test, or else press enter to end the test.\n")
-    else:
-        break
+    #After the two inputs, give feedback according to the value of love_index
+    print("Here is a love potion specially made for you:")
+    if (love_index < 10):
+        print("Outlook good, just ask them out on a date!")
+    elif (love_index >= 20):
+        print("Just give up already!")
+    elif (love_index >= 40):
+        print ("This escalated quickly")
+    elif (love_index >= 60):
+        print("Come on chap, get your hopes up and ask them to be yours")
+    elif (love_index >= 90):
+        print("You are clearly meant to be together...just marry already!")
+
+
+    # chatbot function, that answers questions about relationship
+    user = input("You came to me because you seem to have questions about your relationship. Now ask.\n")
+    while user != "":
+        res = chatbot.chatbot_response(user)
+        user = input(res + "\n")
+
+    user = input("Type in 'new' to start a new test, or else press enter to end the test.\n")
 
 print("Thank you for your visit and hope to see you soon!")
